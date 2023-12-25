@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math</title>
+    <style>
+        /* :root{
+            color-scheme: dark;
+        } */
+        .RPS {
+            height: 100px;
+            width: 100px;
+            margin-left: 50px;
+            cursor: pointer;
+        }
+
+        .coolText {
+            color: cornsilk;
+            background-color: dimgray;
+        }
+
+        /* Example styles - adjust as needed */
+        .dropbtn {
+            background-color: #f2f2f2;
+            color: #d87070;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 30px;
+        }
+
+        .dropdown {
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            z-index: 1;
+            box-shadow: 0 4px 8px 0 rgba(87, 221, 255);
+        }
+
+        .dropdown-content a {
+            color: #972222;
+            padding: 12px 16px;
+            text-decoration: none;
+            /* gets rid of underline in <a> */
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+            color: #1c84c0;
+            transition: 0.3s;
+        }
+
+        .show {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dropdown">
+        <button onclick="toggleDropdown()" class="dropbtn"><img
+                src="https://cdn-icons-png.flaticon.com/512/56/56763.png" style="width: 20px;"> &#9662;</button>
+        <div id="myDropdown" class="dropdown-content">
+            <a href="#">Action 1</a>
+            <a href="#">Action 2</a>
+            <a href="#">Action 3</a>
+            <!-- Add more actions here -->
+        </div>
+    </div>
+    <button onclick="Add(1)">1</button>
+    <button o nclick="Add(2)">2</button>
+    <button onclick="Add('4')">4</button>
+    <button onclick="Add('0')">0</button>
+    <br><br>
+    <button onclick="Add(' + ')">+</button>
+    <button onclick="total()">=</button>
+    <br><br>
+    <button onclick="time(total_val)">time</button>
+    <button onclick="age(total_val)">age</button>
+    <button onclick="coinflip(Math.random())">flip</button>
+    <br><br>
+    <button onclick="guess('heads')">heads</button>
+    <button onclick="guess('tails')">tails</button>
+    <br><br>
+    <img id="sillycat" src="https://i.imgflip.com/6a2bz4.jpg" width="300" height="200">
+    <button id="catexplode" onclick="changesrc('explode')">explode</button>
+    <br><br>
+    <p id="gamerps" style="text-align: center;">Rock Paper Scissors!</p>
+    <section style="text-align: center;" id="rps">Score: </section>
+    <form>
+        <img class="RPS" onclick="rps('Rock')"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKX3bCHoOuJJ-wPQ1OM8oDsEyZ9E0YJ0St4_4G7Y5TKNbCXFVqVaSBWg8hUX0Xo3iDGko&usqp=CAU">
+        <img class="RPS" onclick="rps('Paper')"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRV2XEu5esaDLvMq6dg48P84DviK95duR5FXX2U45kIhQVVS4BF7p-IVLmszy3Kz9u8DM&usqp=CAU">
+        <img class="RPS" onclick="rps('Scissor')"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKyJob5hcksKHEhaDgqD7g1122-WhLmEQAKVJiozWqvSjHlNr8Qy0rD2HG8ocMWBWS9QU&usqp=CAU">
+    </form>
+    <button onclick="resetscore()">reset</button>
+    <br><br>
+    <form action="/submit-form" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <input type="submit">
+    </form>
+    <br><br>
+    <input placeholder="Enter your Name" class="myName">
+    <button onclick="displayName()">Submit</button>
+    <p id="text"></p>
+    <input placeholder="Consumption" id="cmp">
+    <button onclick="cmprate()">calculate</button>
+    <p class="coolText" id="Globaldisplay"></p>
+    <script>
+        let calculation = '';
+        function Add(parameter1 = '') {
+            calculation += parameter1;
+            console.log(calculation);
+        }
+        function total() {
+            total_val = eval(calculation)
+            console.log(total_val)
+            calculation = '';
+        }
+
+        let total_val = '';
+        function time(parameter1) {
+            let name = 'Ryan';
+            parameter1 >= 6 && parameter1 <= 12 ?
+                console.log(`Good morning ${name}!`) :
+                parameter1 >= 13 && parameter1 <= 17 ?
+                    console.log(`Good afternoon ${name}!`) :
+                    console.log(`Good night ${name}!`);
+        }
+
+        let holiday = false;
+        function age(parameter1) {
+            if ((parameter1 <= 6 || parameter1 >= 65) && !holiday)
+                console.log('Discount')
+            else
+                console.log('No discount')
+        }
+
+        let result = '';
+        function coinflip(parameter1) {
+            console.log(parameter1)
+            if (parameter1 < 1 / 2)
+                result = 'heads';
+            else if (parameter1 < 2 / 2)
+                result = 'tails';
+            console.log(result)
+        }
+        function guess(parameter1) {
+            parameter1 === result ?
+                console.log('You win!') :
+                console.log('You lose!');
+            console.log(parameter1)
+        }
+        function changesrc(parameter1) {
+            let exploded = false;
+            if (parameter1 === 'explode') {
+                document.getElementById("sillycat").src = "https://img.freepik.com/premium-photo/fiery-explosion-with-white-background-red-explosion-with-word-fire-it_81048-4728.jpg";
+                document.getElementById("catexplode").onclick = function () { changesrc('revive') }
+            }
+            if (parameter1 === 'revive') {
+                document.getElementById("sillycat").src = "https://i.imgflip.com/6a2bz4.jpg";
+                document.getElementById("catexplode").onclick = function () { changesrc('explode') }
+            }
+        }
+
+        let score = JSON.parse(localStorage.getItem('score'));
+        function resetscore() {
+            localStorage.setItem('score', JSON.stringify(score));
+            score = {
+                wins: 0,
+                losses: 0,
+                draw: 0
+            }
+            rps()
+        }
+        document.getElementById("rps").innerHTML = `Wins: ${score.wins}, Losses: ${score.losses}, Draws: ${score.draw}`
+        function rps(parameter1) {
+            let botguess = Math.random();
+            let player2 = ''
+            let result = ''
+            if (botguess <= 3 / 3)
+                player2 = 'Rock';
+            if (botguess <= 2 / 3)
+                player2 = 'Paper';
+            if (botguess <= 1 / 3)
+                player2 = 'Scissor';
+            if (parameter1 === 'Rock')
+                if (player2 === 'Paper')
+                    result = "You lost!"
+                else
+                    result = "You win!"
+            if (parameter1 === 'Paper')
+                if (player2 === 'Scissor')
+                    result = "You lost!"
+                else
+                    result = "You win!"
+            if (parameter1 === 'Scissor')
+                if (player2 === 'Rock')
+                    result = "You lost!"
+                else
+                    result = "You win!"
+            if (parameter1 === player2)
+                result = "Tie!"
+            if (result === "You win!")
+                score.wins += 1;
+            if (result === "You lost!")
+                score.losses += 1;
+            if (result === "Tie!")
+                score.draw += 1;
+            localStorage.setItem('score', JSON.stringify(score));
+            document.getElementById("sillycat").src = "https://i.imgflip.com/6a2bz4.jpg";
+            if (parameter1 === undefined)
+                document.getElementById("rps").innerHTML = `Wins: ${score.wins}, Losses: ${score.losses}, Draws: ${score.draw}`
+            else
+                document.getElementById("rps").innerHTML = `${result} <br> You: ${parameter1} <br>Player2: ${player2} <br> Wins: ${score.wins}, Losses: ${score.losses}, Draws: ${score.draw}`
+            document.getElementById("gamerps").style.color = "red"
+        }
+        function displayName() {
+            let name = document.querySelector('.myName').value;
+            document.getElementById('text').innerText = `I am ${name}`;
+        }
+        function cmprate() {
+            let cmp = Number(document.getElementById('cmp').value);
+            let w_fee = 152;
+            if (cmp > 10) {
+                cmp -= 10;
+                if (cmp < 10)
+                    w_fee += cmp * 16.80;
+                else
+                    w_fee += 10 * 16.80;
+            }
+            if (cmp > 10) {
+                cmp -= 10;
+                if (cmp < 10)
+                    w_fee += cmp * 19.77;
+                else
+                    w_fee += 10 * 19.77;
+            }
+            if (cmp > 10) {
+                cmp -= 10;
+                w_fee += cmp * 48.40;
+            }
+            document.getElementById("Globaldisplay").innerText = `Water Fee: ${w_fee}`;
+        }
+        function toggleDropdown() {
+            var dropdown = document.getElementById("myDropdown");
+            dropdown.classList.toggle("show");
+        }
+
+        // Close the dropdown menu if the user clicks outside of it
+        window.onclick = function (event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+
+    </script>
+</body>
+
+</html>

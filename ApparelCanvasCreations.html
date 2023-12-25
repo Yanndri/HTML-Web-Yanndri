@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root {
+            color-scheme: dark;
+        }
+
+        header {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            color: beige;
+            position: fixed;
+            /* Makes element unmoveable */
+            top: 0;
+            /* Top Margin */
+            left: 0;
+            /* Left Margin */
+            width: 100%;
+            background-color: rgb(0, 0, 0, 0.7);
+            /* 0.7 is the transparency */
+            padding: 10px;
+            /* Adjust padding as needed */
+            z-index: 100;
+            /* Ensures the header stays above other content */
+            display: grid;
+            grid-template-columns: 90px 1fr 90px;
+        }
+
+        .main-content {
+            text-align: justify;
+            margin-left: 50px;
+            margin-right: 100px;
+            padding-top: 50px;
+            /* Adjust based on the height of your header */
+        }
+
+        body {
+            font-family: cursive;
+            color: darkgrey;
+        }
+
+        a {
+            color: #538b5f;
+            text-decoration: none;
+            /* Remove default underline */
+            transition: color 0.3s ease;
+            /* Smooth color transition on hover */
+            cursor: pointer;
+            /* Change cursor on hover */
+        }
+
+        /* Hover effect for links */
+        a:hover {
+            /*text-decoration: underline; /* Add underline on hover */
+            color: #c7ffd3;
+            /* Adjust color on hover */
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+
+        }
+
+        .footer-bottom {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            /*ensures equal space around the grid items along the main axis.*/
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .businessmen {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            column-gap: 50px;
+        }
+
+        .menuoptions {
+            display: none;
+        }
+
+        .show {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <small id="Home">&nbsp;</small>
+    <header>
+        <div style="display: inline-block;">
+            <img id="menubtn" onclick="displaymenu()"
+                style="width: 20px; filter: hue-rotate(200deg); margin-top: 15px; cursor: pointer;"
+                src="https://cdn-icons-png.flaticon.com/512/248/248917.png">
+            <div id="menu" class="menuoptions">
+                <p>Meow</p>
+                <p>Meow1</p>
+                <p>Meow2</p>
+            </div>
+        </div>
+        <a href="#Home" style="font-size: 35px; text-align: center;"> RYC Clothing </a>
+    </header>
+    <div class="main-content">
+        <div style="color:antiquewhite">RYC Clothing</div>
+        &nbsp; &nbsp; &nbsp; brings creativity, confidence, and adds a fresh approach to apparel decoration.
+        <br>
+        designs are vibrant, eye-catching, and perhaps even trend-setting.
+        <br><br>
+        <div style="color:antiquewhite">We Customize Apparels</div>
+        <br>
+        &nbsp; &nbsp; &nbsp; involving Vinyl Heat Transfer and Image editing services that converts any images to be
+        printable in vinyl.
+        <br>
+        Designs are transfered on a special film, that is placed on top of your garment.
+        <br>
+        A commercial heat press then applies heat to the film, which transfers the ink from the film to your garment.
+        <br>
+        The printing service can only use one color per vinyl, so requiring more than one color will require additional
+        Vinyl per film/design
+        <br><br>
+        The heat press method is ideal for oddly-shaped garments, such as hats, backpacks, and fanny packs. It allows
+        you to add logos in areas or on garments
+        <br>
+        A side printing business run by College Students for Project purposes.
+        <br><br>
+        <h4 style="text-align: center; margin: 0;">Collaborators:</h4>
+        <div class="businessmen">
+            <p style="text-align: center;">Ryan Andrie Coretico</p>
+            <p style="text-align: center;">Riymon Arong Palomar</p>
+            <p style="text-align: center;">Yuu Le</p>
+            <img class="resize-image" style="width: 200px"
+                src="https://scontent.fmnl9-1.fna.fbcdn.net/v/t39.30808-6/405366786_1712435575925003_8839865626370041793_n.jpg?_nc_cat=111&amp;ccb=1-7&amp;_nc_sid=efb6e6&amp;_nc_eui2=AeEvhoV-7FYGiKgXeubwpzYNueVQ8xYOyiq55VDzFg7KKoMx8lZzE4QUYP5sNy4nmNxI1S7etC4Vap65YRiLBdHy&amp;_nc_ohc=RE0sXufBFgEAX8-b5KN&amp;_nc_ht=scontent.fmnl9-1.fna&amp;oh=00_AfDOOWunm4T5YwmG01BuTAnsBY1ay6GG_26gxJbXOpHg3g&amp;oe=6585F2F7">
+            <img class="resize-image" style="width: 200px"
+                src="https://scontent.fmnl9-1.fna.fbcdn.net/v/t39.30808-6/378309294_1532937907110913_913750004142665388_n.jpg?_nc_cat=109&amp;ccb=1-7&amp;_nc_sid=efb6e6&amp;_nc_eui2=AeGn6XqjwEbCpqLAYo4OtF1mEk_KUv2g0jAST8pS_aDSMFckk0gZqwz6O2mijYBKuQSJTrjLqSKNFDlDRDSpch1L&amp;_nc_ohc=KOUqPrIf4hMAX9y_dcf&amp;_nc_ht=scontent.fmnl9-1.fna&amp;oh=00_AfBx7iSxZ3qhWGvz4381T0gmNba1R-1UOoIYsYY9gjo1lQ&amp;oe=6585ECCF">
+            <img class="resize-image" style="width: 200px"
+                src="https://scontent.fmnl9-4.fna.fbcdn.net/v/t39.30808-6/408681574_1030369068267026_5124566477523622574_n.jpg?_nc_cat=105&amp;ccb=1-7&amp;_nc_sid=efb6e6&amp;_nc_eui2=AeEUFB851FY2xjoNG6riS-HYL-z73OVZRd8v7Pvc5VlF36h5k3ca5QGkcD9QwpyVnwrZl64kU7EMQaFdb7yop5lo&amp;_nc_ohc=1L4oxBtw81UAX_8LX15&amp;_nc_ht=scontent.fmnl9-4.fna&amp;oh=00_AfDlMtPm320kRzPZ8YliyCpuxDKTXtC4KaBXA5k_UCKQPg&amp;oe=658506B6">
+        </div>
+    </div>
+    <footer>
+        <p style="margin-left: 10px;">
+        <h2>Contact Details:</h2>
+        0999-669-9326 <br>
+        <br>
+        Business Email:
+        <br>
+        <a>
+            cyrandi369@gmail.com
+        </a>
+        <br>
+        Facebook Page:
+        <br>
+        </p>
+    </footer>
+    <div class="footer-bottom">
+        Copyright 2023 - 2024 Canvas Apparel Creations Co.
+    </div>
+    <script>
+        var menubtn = document.getElementById('menubtn');
+        function displaymenu() {
+            document.getElementById('menu').classList.toggle("show");
+        }
+        /*
+        window.onclick = function (event) {
+            if (event.target !== menubtn)
+                document.getElementById('menu').style.display = "none";
+        }*/
+        /*
+        window.onclick = function (event) {
+            if (event.target !== menubtn)
+                var dropdowns = document.getElementById("menu");
+        }*/
+    </script>
+</body>
+
+</html>
