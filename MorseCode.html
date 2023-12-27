@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>MorseCode</title>
+		<style>
+			body {
+				font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+					"Lucida Sans", Arial, sans-serif;
+				background-color: #3caea3;
+				color: #1a3a45;
+			}
+			p {
+				margin: 0;
+			}
+			.container {
+				display: flex;
+				justify-content: center;
+			}
+			textarea {
+				margin: 12px;
+				resize: none;
+				border-width: 20px;
+				width: 60vw;
+				text-align: center;
+				font-size: xx-large;
+				border-color: #e79d56;
+				height: 30px;
+			}
+			section {
+				justify-content: space-around;
+				background-color: #f6d55c;
+				border: 10px solid #000;
+				border-color: #e79d56;
+				overflow-wrap: break-word;
+			}
+			footer {
+				margin-top: 100vh;
+				background-color: #e79d56;
+			}
+			button {
+				background-color: #e79d56;
+			}
+			h1 {
+				display: grid;
+				display: flex;
+				grid-template-columns: 20px 1fr 50px;
+			}
+		</style>
+		<audio id="dot" src="dot.mp3"></audio>
+		<audio id="dash" src="dash.mp3"></audio>
+	</head>
+	<body>
+		<section>
+			<div class="container">
+				<textarea
+					id="inputarea"
+					placeholder="Text or MorseCode here"
+				></textarea>
+			</div>
+		</section>
+		<p>note: Morse Code should be separated by <strong>space</strong></p>
+		<h1>
+			Text:
+			<section id="text">Text translation</section>
+		</h1>
+		<h1>
+			Morse:
+			<section id="morse">Morse Translation</section>
+		</h1>
+		<h1>
+			<button onclick="playsound()">Play Morse with Sound</button>
+		</h1>
+		<footer>asd</footer>
+	</body>
+	<script>
+		const morsecode = {
+			A: ".-",
+			B: "-...",
+			C: "-.-.",
+			D: "-..",
+			E: ".",
+			F: "..-.",
+			G: "--.",
+			H: "....",
+			I: "..",
+			J: ".---",
+			K: "-.-",
+			L: ".-..",
+			M: "--",
+			N: "-.",
+			O: "---",
+			P: ".--.",
+			Q: "--.-",
+			R: ".-.",
+			S: "...",
+			T: "-",
+			U: "..-",
+			V: "...-",
+			W: ".--",
+			X: "-..-",
+			Y: "-.--",
+			Z: "--..",
+		};
+		let textarea = document.getElementById("inputarea");
+		let text = "";
+		let morse = "";
+		let arr = [];
+		let i = 0;
+		let recentmorse;
+		textarea.addEventListener("keypress", function (event) {
+			if (event.key === "Enter") {
+				text = textarea.value;
+				document.getElementById("text").innerText = `${text}`;
+				text = text.toUpperCase();
+				textarea.value = "";
+				for (i = 0; i < text.length; i++) {
+					convertmorse(text[i]);
+				}
+				recentmorse = morse;
+				morse = "";
+			}
+		});
+
+		function convertmorse(arr) {
+			if (arr in morsecode) {
+				console.log(morsecode[arr]);
+				morse = morse + morsecode[arr] + " ";
+				document.getElementById("morse").innerText = `${morse}`;
+			}
+		}
+		function playsound() {
+			i = 0;
+			let interval = setInterval(() => {
+				if (recentmorse[i] === ".") document.getElementById("dot").play();
+				else if (recentmorse[i] === "-") document.getElementById("dash").play();
+				console.log[recentmorse[i]];
+				i++;
+				if (i >= recentmorse.length) clearInterval(interval);
+			}, 500);
+		}
+	</script>
+</html>
