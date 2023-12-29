@@ -5,10 +5,36 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>MorseCode</title>
 		<style>
+			header {
+				font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+				color: beige;
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				background-color: #e79d56;
+				padding: 10px;
+				z-index: 100;
+				display: grid;
+				grid-template-columns: 10px 1fr 150px;
+				/* border-bottom: 3px solid #c24620; */
+				/* background: linear-gradient(to bottom, #c24620, #a32904); */
+				background: radial-gradient(circle, #c24620, #a32904);
+			}
+			header p {
+				text-align: right;
+				margin-right: 20px;
+				background-color: #c24620;
+				padding: 5px;
+				border: 3px solid #a32904;
+				cursor: pointer;
+			}
 			body {
 				font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
 					"Lucida Sans", Arial, sans-serif;
-				background-color: #3caea3;
+				/* background-color: #3caea3; */
+				background: radial-gradient(circle, #3caea3, #1f8076);
+
 				color: #1a3a45;
 			}
 			p {
@@ -28,7 +54,11 @@
 				border-color: #e79d56;
 				height: 30px;
 			}
+			textarea::placeholder {
+				font-size: x-large;
+			}
 			section {
+				text-align: center;
 				justify-content: space-around;
 				background-color: #f6d55c;
 				border: 10px solid #000;
@@ -42,16 +72,17 @@
 			button {
 				background-color: #e79d56;
 			}
-			h1 {
-				display: grid;
-				display: flex;
-				grid-template-columns: 20px 1fr 50px;
-			}
 		</style>
 		<audio id="dot" src="dot.mp3"></audio>
 		<audio id="dash" src="dash.mp3"></audio>
 	</head>
 	<body>
+		<header>
+			<div></div>
+			<div></div>
+			<p>Play MorseGame</p>
+		</header>
+		<br /><br /><br />
 		<section>
 			<div class="container">
 				<textarea
@@ -66,12 +97,18 @@
 			<section id="text">Text translation</section>
 		</h1>
 		<h1>
-			Morse:
+			Morse:<img
+				id="sound"
+				onclick="togglesound(-1)"
+				title="Sound On"
+				style="width: 30px; cursor: pointer; filter: contrast(150%)"
+				src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/2048px-Speaker_Icon.svg.png"
+			/>
 			<section id="morse">Morse Translation</section>
 		</h1>
-		<h1>
-			<button onclick="playsound()">Play Morse with Sound</button>
-		</h1>
+
+		<button onclick="randommorse()">Guess the Morse</button>
+
 		<footer>asd</footer>
 	</body>
 	<script>
@@ -106,19 +143,19 @@
 		let textarea = document.getElementById("inputarea");
 		let text = "";
 		let morse = "";
-		let arr = [];
 		let i = 0;
 		let recentmorse;
+		let bool = 1;
 		textarea.addEventListener("keypress", function (event) {
 			if (event.key === "Enter") {
 				text = textarea.value;
+				textarea.value = null;
 				document.getElementById("text").innerText = `${text}`;
 				text = text.toUpperCase();
-				textarea.value = "";
 				for (i = 0; i < text.length; i++) {
 					convertmorse(text[i]);
 				}
-				recentmorse = morse;
+				playsound(morse);
 				morse = "";
 			}
 		});
@@ -130,15 +167,38 @@
 				document.getElementById("morse").innerText = `${morse}`;
 			}
 		}
-		function playsound() {
+
+		function togglesound(parameter1) {
+			bool = bool * parameter1;
+			const sound = document.getElementById("sound");
+			if (bool < 0) {
+				sound.title = "Sound Off";
+				sound.src =
+					"https://www.freeiconspng.com/uploads/mute-off-sound-off-icon-1.png";
+			} else {
+				sound.name = "Sound On";
+				sound.src =
+					"https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/2048px-Speaker_Icon.svg.png";
+			}
+		}
+		function playsound(morse) {
 			i = 0;
 			let interval = setInterval(() => {
-				if (recentmorse[i] === ".") document.getElementById("dot").play();
-				else if (recentmorse[i] === "-") document.getElementById("dash").play();
-				console.log[recentmorse[i]];
+				if (morse[i] === ".") document.getElementById("dot").play();
+				else if (morse[i] === "-") document.getElementById("dash").play();
+				console.log[morse[i]];
 				i++;
-				if (i >= recentmorse.length) clearInterval(interval);
+				if (i >= morse.length) clearInterval(interval);
 			}, 500);
+		}
+		function randommorse() {
+			const character = Object.keys(morsecode);
+			const random = Math.floor(Math.random() * character.length);
+			const randchar = character[random];
+			const randmorse = morsecode[randchar];
+			document.getElementById(
+				"morse"
+			).innerText = `${random} ${randchar} ${randmorse}`;
 		}
 	</script>
 </html>
