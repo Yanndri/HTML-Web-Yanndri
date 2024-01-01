@@ -4,6 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>MorseCode</title>
+		<link href="index.css" rel="stylesheet" type="text/css" />
 		<style>
 			header {
 				font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
@@ -55,16 +56,8 @@
 			textarea::placeholder {
 				text-align: center;
 				margin: 10px;
-				font-size:large;
+				font-size: large;
 			}
-			/* section {
-				text-align: center;
-				justify-content: space-around;
-				background-color: #f6d55c;
-				border: 10px solid #000;
-				border-color: #e79d56;
-				overflow-wrap: break-word;
-			} */
 			footer {
 				margin-top: 100vh;
 				background-color: #e79d56;
@@ -83,8 +76,13 @@
 			.main_content {
 				margin-left: 120px;
 				box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.534);
+				transition: width 0.3s, height 0.3s, background-color 0.3s,
+					margin-left 0.5s ease;
 			}
 			.sidebar {
+				opacity: 0;
+				visibility: hidden;
+				transition: opacity 1s ease;
 				position: absolute;
 				margin: 0px;
 			}
@@ -114,7 +112,6 @@
 				transition: width 0.3s, height 0.3s, background-color 0.3s;
 			}
 			.currentsite {
-				
 				background-color: #1a3a45;
 				color: antiquewhite;
 			}
@@ -123,13 +120,22 @@
 				text-align: center;
 				border: 3px solid #3caea300;
 			}
+			.show {
+				opacity: 1;
+				visibility: visible;
+			}
+			.small_image {
+				z-index: 100; /* to ensure that the image isn't covered by other elements*/
+				cursor: pointer;
+				width: 20px;
+			}
 		</style>
 		<audio id="dot" src="dot.mp3"></audio>
 		<audio id="dash" src="dash.mp3"></audio>
 	</head>
 	<body>
 		<div style="margin-top: 10vh">
-			<div class="sidebar">
+			<div id="menu" class="sidebar">
 				<img src="https://pngimg.com/d/github_PNG15.png" />
 				<p class="currentsite">Morse <br />Translator</p>
 				<p>Morse<br />Game</p>
@@ -141,10 +147,16 @@
 				<p>Meow1</p>
 				<p>Meow2</p>
 			</div>
-			<div class="main_content">
+			<div id="main">
 				<div style="margin: 20px">
 					<header>
-						<div></div>
+						<img
+							id="menuicon"
+							style="filter: brightness(1000%)"
+							class="small_image"
+							onclick="displaymenu()"
+							src="https://cdn-icons-png.flaticon.com/512/248/248917.png"
+						/>
 						<div></div>
 						<p>Play MorseGame</p>
 					</header>
@@ -152,21 +164,26 @@
 					<p>
 						<br />note: Morse Code should be separated by <strong>space</strong>
 					</p>
+					<p id="textContainer"></p>
+
 					<div class="container">
-						<textarea id="inputarea" placeholder="Text or MorseCode here"></textarea></textarea
-						>
+						<textarea id="inputarea" placeholder="Input here"></textarea>
 					</div>
 					<br /><br />
-					<div style="background-color: #1f8076;">
+					<div style="background-color: #1f8076">
 						<h4>Text:</h4>
 						<section class="textdisplay" id="text">Text translation</section>
-						<h4>Morse: 						<img
-							id="sound"
-							onclick="togglesound(-1)"
-							title="Sound On"
-							style="width: 20px; cursor: pointer; filter: contrast(150%)"
-							src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/2048px-Speaker_Icon.svg.png"
-						/></h4>
+						<h4>
+							Morse:
+							<img
+								id="sound"
+								onclick="togglesound(-1)"
+								title="Sound On"
+								class="small_image"
+								style="filter: contrast(150%)"
+								src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/2048px-Speaker_Icon.svg.png"
+							/>
+						</h4>
 						<section class="textdisplay" id="morse">Morse Translation</section>
 						<h4></h4>
 					</div>
@@ -205,12 +222,17 @@
 			Y: "-.--",
 			Z: "--..",
 		};
+		function displaymenu() {
+			document.getElementById("menu").classList.toggle("show");
+			document.getElementById("main").classList.toggle("main_content");
+		}
 		let textarea = document.getElementById("inputarea");
 		let text = "";
 		let morse = "";
 		let i = 0;
 		let recentmorse;
 		let bool = 1;
+		let volume = true;
 		textarea.addEventListener("keypress", function (event) {
 			if (event.key === "Enter") {
 				text = textarea.value;
@@ -240,18 +262,24 @@
 				sound.title = "Sound Off";
 				sound.src =
 					"https://www.freeiconspng.com/uploads/mute-off-sound-off-icon-1.png";
+				volume = false;
 			} else {
 				sound.name = "Sound On";
 				sound.src =
 					"https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/2048px-Speaker_Icon.svg.png";
+				volume = true;
 			}
 		}
 		function playsound(morse) {
 			i = 0;
+
 			let interval = setInterval(() => {
-				if (morse[i] === ".") document.getElementById("dot").play();
-				else if (morse[i] === "-") document.getElementById("dash").play();
+				if (volume) {
+					if (morse[i] === ".") document.getElementById("dot").play();
+					else if (morse[i] === "-") document.getElementById("dash").play();
+				}
 				console.log[morse[i]];
+
 				i++;
 				if (i >= morse.length) clearInterval(interval);
 			}, 500);
