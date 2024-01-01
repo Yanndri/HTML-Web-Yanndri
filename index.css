@@ -1,0 +1,86 @@
+body {
+	font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+		"Lucida Sans", Arial, sans-serif;
+}
+header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding: 10px;
+	z-index: 100;
+	display: grid;
+	grid-template-columns: 200px 1fr 200px;
+}
+header p {
+	text-align: center;
+	margin-right: 20px;
+	padding: 4px;
+	cursor: pointer;
+}
+p {
+	margin: 0;
+}
+.container {
+	display: flex;
+	justify-content: center;
+}
+textarea {
+	border-radius: 100px;
+	resize: none;
+	border-width: 3px;
+	width: 75vw;
+	height: 30px;
+}
+textarea::placeholder {
+	text-align: center;
+}
+footer {
+	margin-top: 100vh;
+}
+h1 h2 h3 h4 {
+	padding: 10px;
+	background-color: #1a3a45;
+}
+.main_content {
+	margin-left: 120px;
+	box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.534);
+}
+.transiton {
+	transition: width 0.3s, height 0.3s, background-color 0.3s,
+		margin-left 0.5s ease, opacity 1s ease, visibility is ease,
+		background-color 0.6s;
+}
+.sidebar {
+	opacity: 0;
+	visibility: hidden;
+	position: absolute;
+	margin: 0px;
+}
+.sidebar p {
+	border-top-left-radius: 100px;
+	border-bottom-left-radius: 100px;
+	padding-left: 25px;
+	padding-right: 23px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-bottom: 5px;
+	cursor: pointer;
+	text-align: center;
+}
+.sidebar p:hover {
+	color: antiquewhite;
+	background-color: #1a3a45;
+}
+.currentsite {
+	background-color: #1a3a45;
+	color: antiquewhite;
+}
+.show {
+	opacity: 1;
+	visibility: visible;
+}
+.img_icon {
+	z-index: 100; /* to ensure that the image isn't covered by other elements*/
+	width: 20px;
+}
